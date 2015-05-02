@@ -24,3 +24,7 @@ barSlider.value = 50.0
 
 barSlider.addTarget(self, action: "barSliderValueChanged:", forControlEvents: .ValueChanged)
 ``` 
+
+## License
+
+KBHBarSlider is available under the MIT license. See the LICENSE file for more info.
