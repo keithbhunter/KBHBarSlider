@@ -19,9 +19,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.barSlider.backgroundColor = .cyanColor()
+        self.barSlider.backgroundBarColor = .whiteColor()
+        self.barSlider.barColor = .magentaColor()
+        self.barSlider.barWidth = self.view.frame.size.width / 2.0
+        self.barSlider.direction = .BottomToTop
+        
+        self.barSlider.minimumValue = 30.0
         self.barSlider.maximumValue = 100.0
         self.barSlider.value = 50.0
-        self.barSlider.barColor = self.view.tintColor
+        
         self.barSlider.addTarget(self, action: "barSliderValueChanged:", forControlEvents: .ValueChanged)
         self.label.text = "\(self.barSlider.value)"
     }
@@ -30,7 +37,7 @@ class ViewController: UIViewController {
     // MARK: - Gesture
     
     func barSliderValueChanged(sender: KBHBarSlider) {
-        self.label.text = "\(sender.value)"
+        self.label.text = "\(Int(sender.value))"
     }
 
 }
