@@ -44,6 +44,7 @@ public enum KBHBarSliderAlignment {
 }
 
 
+@IBDesignable
 public class KBHBarSlider: UIControl {
     
     // MARK: - Backing Variables
@@ -68,7 +69,7 @@ public class KBHBarSlider: UIControl {
     // MARK: - Properties
     
     /// Current value of the bar slider. Defaults to 0.5.
-    public var value: CGFloat {
+    @IBInspectable public var value: CGFloat {
         get {
             return _value
         }
@@ -87,7 +88,7 @@ public class KBHBarSlider: UIControl {
     }
     
     /// Minimum value the bar slider will allow. Defaults to 0.
-    public var minimumValue: CGFloat {
+    @IBInspectable public var minimumValue: CGFloat {
         get {
             return _minimumValue
         }
@@ -107,7 +108,7 @@ public class KBHBarSlider: UIControl {
     }
     
     /// Maximum value the bar slider will allow. Defaults to 1.
-    public var maximumValue: CGFloat {
+    @IBInspectable public var maximumValue: CGFloat {
         get {
             return _maximumValue
         }
@@ -127,21 +128,21 @@ public class KBHBarSlider: UIControl {
     }
     
     /// The color of the bar that will be sliding (foreground bar/sliding bar). Defaults to UIColor.blueColor().
-    public var barColor: UIColor = .blueColor() {
+    @IBInspectable public var barColor: UIColor = .blueColor() {
         didSet {
             self.setNeedsDisplay()
         }
     }
     
     /// The color of the bar that will act as a track for the foreground bar to slide on. Defaults to UIColor.lightGrayColor().
-    public var backgroundBarColor: UIColor = .lightGrayColor() {
+    @IBInspectable public var backgroundBarColor: UIColor = .lightGrayColor() {
         didSet {
             self.setNeedsDisplay()
         }
     }
     
     /// The width of the bar slider. Must be between 0 and the view's width. Defaults to the view's width
-    public var barWidth: CGFloat {
+    @IBInspectable public var barWidth: CGFloat {
         get {
             return (_barWidth == KBHBarSliderBarWidthNotSet) ? self.bounds.size.width : _barWidth
         }
@@ -161,14 +162,14 @@ public class KBHBarSlider: UIControl {
     }
     
     /// The direction the sliding bar will be drawn. Defaults to KBHBarSliderDirection.BottomToTop.
-    public var direction: KBHBarSliderDirection = .BottomToTop {
+    @IBInspectable public var direction: KBHBarSliderDirection = .BottomToTop {
         didSet {
             self.setNeedsDisplay()
         }
     }
     
     /// The alignment of the sliding bar within the view. Defaults to KBHBarSliderAlignment.Center.
-    public var alignment: KBHBarSliderAlignment = .Center {
+    @IBInspectable public var alignment: KBHBarSliderAlignment = .Center {
         didSet {
             self.setNeedsDisplay()
         }
