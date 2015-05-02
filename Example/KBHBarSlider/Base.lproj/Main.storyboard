@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="KBHBarSlider" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQ4-Uk-rUx" customClass="KBHBarSlider" customModule="KBHBarSlider" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g70-kc-jJZ">
+                                        <rect key="frame" x="279" y="279" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="g70-kc-jJZ" secondAttribute="centerX" id="8ZM-dc-tEP"/>
+                                    <constraint firstAttribute="centerY" secondItem="g70-kc-jJZ" secondAttribute="centerY" id="S0X-xk-i6b"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hQ4-Uk-rUx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="2Jp-li-5CJ"/>
+                            <constraint firstItem="hQ4-Uk-rUx" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Uxt-Le-4mB"/>
+                            <constraint firstAttribute="trailing" secondItem="hQ4-Uk-rUx" secondAttribute="trailing" id="goe-L0-cE8"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hQ4-Uk-rUx" secondAttribute="bottom" id="oOr-SU-mQY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="barSlider" destination="hQ4-Uk-rUx" id="qC5-ON-kH7"/>
+                        <outlet property="label" destination="g70-kc-jJZ" id="kxe-hD-sbx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>

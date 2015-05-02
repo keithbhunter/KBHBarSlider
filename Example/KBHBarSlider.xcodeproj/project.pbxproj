@@ -13,6 +13,7 @@
 		E787419C1AF455CB00F2D12E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E787419B1AF455CB00F2D12E /* Images.xcassets */; };
 		E787419F1AF455CB00F2D12E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E787419D1AF455CB00F2D12E /* LaunchScreen.xib */; };
 		E78741AB1AF455CB00F2D12E /* KBHBarSliderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78741AA1AF455CB00F2D12E /* KBHBarSliderTests.swift */; };
+		E78741B51AF4561F00F2D12E /* KBHBarSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78741B41AF4561F00F2D12E /* KBHBarSlider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		E78741A41AF455CB00F2D12E /* KBHBarSliderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KBHBarSliderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E78741A91AF455CB00F2D12E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E78741AA1AF455CB00F2D12E /* KBHBarSliderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBHBarSliderTests.swift; sourceTree = "<group>"; };
+		E78741B41AF4561F00F2D12E /* KBHBarSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KBHBarSlider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				E78741941AF455CB00F2D12E /* AppDelegate.swift */,
 				E78741961AF455CB00F2D12E /* ViewController.swift */,
+				E78741B41AF4561F00F2D12E /* KBHBarSlider.swift */,
 				E78741981AF455CB00F2D12E /* Main.storyboard */,
 				E787419B1AF455CB00F2D12E /* Images.xcassets */,
 				E787419D1AF455CB00F2D12E /* LaunchScreen.xib */,
@@ -161,6 +164,7 @@
 				TargetAttributes = {
 					E787418E1AF455CB00F2D12E = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = 45663MH36J;
 					};
 					E78741A31AF455CB00F2D12E = {
 						CreatedOnToolsVersion = 6.3;
@@ -214,6 +218,7 @@
 			files = (
 				E78741971AF455CB00F2D12E /* ViewController.swift in Sources */,
 				E78741951AF455CB00F2D12E /* AppDelegate.swift in Sources */,
+				E78741B51AF4561F00F2D12E /* KBHBarSlider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,9 +347,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = KBHBarSlider/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -352,9 +362,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = KBHBarSlider/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
