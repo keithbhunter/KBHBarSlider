@@ -17,6 +17,7 @@ barSlider.backgroundBarColor = .yellowColor()
 barSlider.barColor = view.tintColor
 barSlider.barWidth = view.frame.size.width / 2.0
 barSlider.direction = .LeftToRight
+barSlider.alignment = .Center
 
 barSlider.minimumValue = 30.0
 barSlider.maximumValue = 100.0

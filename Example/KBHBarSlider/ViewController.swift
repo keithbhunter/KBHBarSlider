@@ -19,11 +19,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.barSlider.backgroundColor = .cyanColor()
-        self.barSlider.backgroundBarColor = .whiteColor()
+        self.barSlider.backgroundColor = .lightGrayColor()
+        self.barSlider.backgroundBarColor = .cyanColor()
         self.barSlider.barColor = .magentaColor()
         self.barSlider.barWidth = self.view.frame.size.width / 2.0
         self.barSlider.direction = .BottomToTop
+        self.barSlider.alignment = .Center
         
         self.barSlider.minimumValue = 30.0
         self.barSlider.maximumValue = 100.0

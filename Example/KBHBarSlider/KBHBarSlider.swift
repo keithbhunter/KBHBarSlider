@@ -30,6 +30,19 @@ public enum KBHBarSliderDirection {
     case BottomToTop
 }
 
+/**
+Describes where the bar slider will be aligned relative to the view.
+
+- Left:   In vertical bars, lines up the left of the bar to the left of the view. In horizontal bars, lines up the tops.
+- Center: In vertical bars, lines up the center x point of the bar to the center x point of the view. In horizontal bars, lines up the center y points.
+- Right:  In vertical bars, lines up the right of the bar to the right of the view. In horizontal bars, lines up the bottoms.
+*/
+public enum KBHBarSliderAlignment {
+    case Left
+    case Center
+    case Right
+}
+
 
 public class KBHBarSlider: UIControl {
     
@@ -148,21 +161,51 @@ public class KBHBarSlider: UIControl {
     }
     
     /// The direction the sliding bar will be drawn. Defaults to KBHBarSliderDirection.BottomToTop.
-    public var direction: KBHBarSliderDirection = .BottomToTop
+    public var direction: KBHBarSliderDirection = .BottomToTop {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+    
+    /// The alignment of the sliding bar within the view. Defaults to KBHBarSliderAlignment.Center.
+    public var alignment: KBHBarSliderAlignment = .Center {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
     
     
     // MARK: - Init
 
+    /**
+    Initializes a KBHBarSlider.
+    
+    :returns: self, initialized using CGRectZero as the frame.
+    */
     public init() {
         super.init(frame: CGRectZero)
         self.setup()
     }
     
+    /**
+    Returns a KBHBarSlider initialized from data in a given unarchiver. (required)
+    
+    :param: aDecoder An unarchiver object.
+    
+    :returns: self, initialized using the data in decoder.
+    */
     public required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.setup()
     }
     
+    /**
+    Initializes and returns a newly allocated KBHBarSlider with the specified frame rectangle.
+    
+    :param: frame The frame rectangle for the bar slider, measured in points.
+    
+    :returns: An initialized KBHBarSlider.
+    */
     override public init(frame: CGRect) {
         super.init(frame: frame)
         self.setup()
@@ -178,53 +221,93 @@ public class KBHBarSlider: UIControl {
     
     override public func drawRect(rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
-        CGContextSetLineWidth(context, self.barWidth)
+        let alignmentPoint = self.alignmentPointInContext(context)
         
         // Draw background bar
         self.backgroundBarColor.setStroke()
-        self.drawBarToPercentage(1.0, inContext: context)
+        self.drawBarToPercentage(1.0, alignedAtXOrY: alignmentPoint, inContext: context)
         
         // Draw sliding bar
         self.barColor.setStroke()
-        self.drawBarToPercentage(_adjustedValue, inContext: context)
+        self.drawBarToPercentage(_adjustedValue, alignedAtXOrY: alignmentPoint, inContext: context)
     }
     
-    private func drawBarToPercentage(percent: CGFloat, inContext context: CGContext) {
+    private func drawBarToPercentage(percent: CGFloat, alignedAtXOrY alignmentPoint: CGFloat, inContext context: CGContext) {
         CGContextBeginPath(context)
         
         switch self.direction {
-        case .BottomToTop: self.drawBarBottomToTopWithPercentage(percent, inContext: context); break
-        case .TopToBottom: self.drawBarTopToBottomWithPercentage(percent, inContext: context); break
-        case .LeftToRight: self.drawBarLeftToRightWithPercentage(percent, inContext: context); break
-        case .RightToLeft: self.drawBarRightToLeftWithPercentage(percent, inContext: context); break
-        default: break
+        case .BottomToTop: self.drawBarBottomToTopWithPercentage(percent, alignedAtXOrY: alignmentPoint, inContext: context); break
+        case .TopToBottom: self.drawBarTopToBottomWithPercentage(percent, alignedAtXOrY: alignmentPoint, inContext: context); break
+        case .LeftToRight: self.drawBarLeftToRightWithPercentage(percent, alignedAtXOrY: alignmentPoint, inContext: context); break
+        case .RightToLeft: self.drawBarRightToLeftWithPercentage(percent, alignedAtXOrY: alignmentPoint, inContext: context); break
         }
         
         CGContextStrokePath(context)
     }
     
-    private func drawBarBottomToTopWithPercentage(percent: CGFloat, inContext context: CGContext) {
-        let centerOfBar = self.bounds.origin.x + (self.bounds.size.width / 2.0)
-        CGContextMoveToPoint(context, centerOfBar, self.bounds.origin.y + self.bounds.size.height)
-        CGContextAddLineToPoint(context, centerOfBar, self.bounds.origin.y + (self.bounds.size.height * (1.0 - percent)))
+    
+    // MARK: - Direction
+    
+    private func drawBarBottomToTopWithPercentage(percent: CGFloat, alignedAtXOrY point: CGFloat, inContext context: CGContext) {
+        CGContextMoveToPoint(context, point, self.bounds.origin.y + self.bounds.size.height)
+        CGContextAddLineToPoint(context, point, self.bounds.origin.y + (self.bounds.size.height * (1.0 - percent)))
     }
     
-    private func drawBarTopToBottomWithPercentage(percent: CGFloat, inContext context: CGContext) {
-        let centerOfBar = self.bounds.origin.x + (self.bounds.size.width / 2.0)
-        CGContextMoveToPoint(context, centerOfBar, self.bounds.origin.y)
-        CGContextAddLineToPoint(context, centerOfBar, self.bounds.origin.y + (self.bounds.size.height * percent))
+    private func drawBarTopToBottomWithPercentage(percent: CGFloat, alignedAtXOrY point: CGFloat, inContext context: CGContext) {
+        CGContextMoveToPoint(context, point, self.bounds.origin.y)
+        CGContextAddLineToPoint(context, point, self.bounds.origin.y + (self.bounds.size.height * percent))
     }
     
-    private func drawBarLeftToRightWithPercentage(percent: CGFloat, inContext context: CGContext) {
-        let centerOfBar = self.bounds.origin.y + (self.bounds.size.height / 2.0)
-        CGContextMoveToPoint(context, self.bounds.origin.x, centerOfBar)
-        CGContextAddLineToPoint(context, self.bounds.origin.x + (self.bounds.size.width * percent), centerOfBar)
+    private func drawBarLeftToRightWithPercentage(percent: CGFloat, alignedAtXOrY point: CGFloat, inContext context: CGContext) {
+        CGContextMoveToPoint(context, self.bounds.origin.x, point)
+        CGContextAddLineToPoint(context, self.bounds.origin.x + (self.bounds.size.width * percent), point)
     }
     
-    private func drawBarRightToLeftWithPercentage(percent: CGFloat, inContext context: CGContext) {
-        let centerOfBar = self.bounds.origin.y + (self.bounds.size.height / 2.0)
-        CGContextMoveToPoint(context, self.bounds.origin.x + self.bounds.size.width, centerOfBar)
-        CGContextAddLineToPoint(context, self.bounds.origin.x + (self.bounds.size.width * (1.0 - percent)), centerOfBar)
+    private func drawBarRightToLeftWithPercentage(percent: CGFloat, alignedAtXOrY point: CGFloat, inContext context: CGContext) {
+        CGContextMoveToPoint(context, self.bounds.origin.x + self.bounds.size.width, point)
+        CGContextAddLineToPoint(context, self.bounds.origin.x + (self.bounds.size.width * (1.0 - percent)), point)
+    }
+    
+    
+    // MARK: - Alignment
+    
+    private func alignmentPointInContext(context: CGContext) -> CGFloat {
+        var point: CGFloat = 0.0
+        
+        switch self.alignment {
+        case .Left:
+            CGContextSetLineWidth(context, self.barWidth * 2.0)
+            
+            if self.direction == .BottomToTop || self.direction == .TopToBottom {
+                point = self.bounds.origin.x
+            } else {
+                point = self.bounds.origin.y
+            }
+            
+            break
+        case .Center:
+            CGContextSetLineWidth(context, self.barWidth)
+            
+            if self.direction == .BottomToTop || self.direction == .TopToBottom {
+                point = self.bounds.origin.x + (self.bounds.size.width / 2.0)
+            } else {
+                point = self.bounds.origin.y + (self.bounds.size.height / 2.0)
+            }
+            
+            break
+        case .Right:
+            CGContextSetLineWidth(context, self.barWidth * 2.0)
+            
+            if self.direction == .BottomToTop || self.direction == .TopToBottom {
+                point = self.bounds.origin.x + self.bounds.size.width
+            } else {
+                point = self.bounds.origin.y + self.bounds.size.height
+            }
+            
+            break
+        }
+        
+        return point
     }
     
     
@@ -270,7 +353,6 @@ public class KBHBarSlider: UIControl {
         case .TopToBottom: return point.y / self.bounds.size.height
         case .LeftToRight: return point.x / self.bounds.size.width
         case .RightToLeft: return 1.0 - (point.x / self.bounds.size.width)
-        default: return 0.0
         }
     }
     
