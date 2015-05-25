@@ -223,8 +223,8 @@ public class KBHBarSlider: UIControl {
     }
     
     private func setup() {
-        let panGesture = UIPanGestureRecognizer(target: self, action: "viewDidPan:")
-        self.gestureRecognizers = [panGesture]
+        _panGesture = UIPanGestureRecognizer(target: self, action: "viewDidPan:")
+        self.gestureRecognizers = [_panGesture]
     }
 
     
