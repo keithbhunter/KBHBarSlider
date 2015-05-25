@@ -65,6 +65,9 @@ public class KBHBarSlider: UIControl {
         }
     }
     
+    /// This pan gesture controls the bar sliding action. It is enabled/disabled by slidingEnabled.
+    private var _panGesture: UIPanGestureRecognizer!
+    
     
     // MARK: - Properties
     
@@ -172,6 +175,13 @@ public class KBHBarSlider: UIControl {
     @IBInspectable public var alignment: KBHBarSliderAlignment = .Center {
         didSet {
             self.setNeedsDisplay()
+        }
+    }
+    
+    /// Enables or disables the sliding bar. This will still allow other touches or gestures to be executed. Defaults to true.
+    @IBInspectable public var slidingEnabled: Bool = true {
+        didSet {
+            _panGesture.enabled = self.slidingEnabled
         }
     }
     
