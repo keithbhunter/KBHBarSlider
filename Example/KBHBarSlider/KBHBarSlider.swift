@@ -66,7 +66,7 @@ public class KBHBarSlider: UIControl {
     }
     
     /// This pan gesture controls the bar sliding action. It is enabled/disabled by slidingEnabled.
-    private var _panGesture: UIPanGestureRecognizer!
+    private var _panGesture: UIPanGestureRecognizer?
     
     
     // MARK: - Properties
@@ -181,7 +181,9 @@ public class KBHBarSlider: UIControl {
     /// Enables or disables the sliding bar. This will still allow other touches or gestures to be executed. Defaults to true.
     @IBInspectable public var slidingEnabled: Bool = true {
         didSet {
-            _panGesture.enabled = self.slidingEnabled
+            if let pan = _panGesture {
+                pan.enabled = self.slidingEnabled
+            }
         }
     }
     
@@ -223,8 +225,7 @@ public class KBHBarSlider: UIControl {
     }
     
     private func setup() {
-        _panGesture = UIPanGestureRecognizer(target: self, action: "viewDidPan:")
-        self.gestureRecognizers = [_panGesture]
+        self.addPanGestureRecognizer()
     }
 
     
@@ -364,6 +365,26 @@ public class KBHBarSlider: UIControl {
         case .TopToBottom: return point.y / self.bounds.size.height
         case .LeftToRight: return point.x / self.bounds.size.width
         case .RightToLeft: return 1.0 - (point.x / self.bounds.size.width)
+        }
+    }
+    
+    /**
+    Adds the UIPanGestureRecognizer that controls the bar sliding action. If the pan gesture exists, this method does nothing.
+    */
+    public func addPanGestureRecognizer() {
+        if _panGesture == nil {
+            _panGesture = UIPanGestureRecognizer(target: self, action: "viewDidPan:")
+            self.addGestureRecognizer(_panGesture!)
+        }
+    }
+    
+    /**
+    Removes the UIPanGestureRecognizer that controls the bar sliding action. If the pan gesture does not exist, this method does nothing.
+    */
+    public func removePanGestureRecognizer() {
+        if _panGesture != nil {
+            self.removeGestureRecognizer(_panGesture!)
+            _panGesture = nil
         }
     }
     
