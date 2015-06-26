@@ -44,7 +44,6 @@ public enum KBHBarSliderAlignment {
 }
 
 
-@IBDesignable
 public class KBHBarSlider: UIControl {
     
     // MARK: - Backing Variables

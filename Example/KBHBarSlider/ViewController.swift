@@ -26,9 +26,9 @@ class ViewController: UIViewController {
         self.barSlider.direction = .BottomToTop
         self.barSlider.alignment = .Center
         
-        self.barSlider.minimumValue = 30.0
-        self.barSlider.maximumValue = 100.0
-        self.barSlider.value = 50.0
+        self.barSlider.minimumValue = 0
+        self.barSlider.maximumValue = 100
+        self.barSlider.value = 50
         
         self.barSlider.addTarget(self, action: "barSliderValueChanged:", forControlEvents: .ValueChanged)
         self.label.text = "\(self.barSlider.value)"

@@ -2,8 +2,8 @@
 
 A vertical or horizontal bar slider view. Functions similarly to `UISlider`. 
 
-![Alt text](https://github.com/keithbhunter/KBHBarSlider/blob/master/Images/Bottom-To-Top-90.png "Vertical KBHBarSlider with minimum of 30 and maximum of 100")
-![Alt text](https://github.com/keithbhunter/KBHBarSlider/blob/master/Images/Left-To-Right-45.png "Horizontal KBHBarSlider with minimum of 30 and maximum of 100")
+![Alt text](https://github.com/keithbhunter/KBHBarSlider/blob/master/Images/BottomToTop.gif "Vertical KBHBarSlider with minimum of 0 and maximum of 100")
+![Alt text](https://github.com/keithbhunter/KBHBarSlider/blob/master/Images/LeftToRight.gif "Horizontal KBHBarSlider with minimum of 0 and maximum of 100")
 
 ## Usage
 
@@ -13,15 +13,15 @@ A vertical or horizontal bar slider view. Functions similarly to `UISlider`.
 let barSlider = KBHBarSlider(aFrame)
 
 barSlider.backgroundColor = .lightGrayColor()
-barSlider.backgroundBarColor = .yellowColor()
-barSlider.barColor = view.tintColor
-barSlider.barWidth = view.frame.size.width / 2.0
-barSlider.direction = .LeftToRight
+barSlider.backgroundBarColor = .cyanColor()
+barSlider.barColor = .magentaColor()
+barSlider.barWidth = aWidth
+barSlider.direction = .BottomToTop
 barSlider.alignment = .Center
 
-barSlider.minimumValue = 30.0
-barSlider.maximumValue = 100.0
-barSlider.value = 50.0
+barSlider.minimumValue = 0
+barSlider.maximumValue = 100
+barSlider.value = 50
 
 barSlider.addTarget(self, action: "barSliderValueChanged:", forControlEvents: .ValueChanged)
 ``` 
